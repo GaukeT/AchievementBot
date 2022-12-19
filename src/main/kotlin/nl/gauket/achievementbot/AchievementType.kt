@@ -1,4 +1,4 @@
-package nl.gauket.performer
+package nl.gauket.achievementbot
 
 // f.e. daily, basic, anniversary etc...
 enum class AchievementType(val label: String) {

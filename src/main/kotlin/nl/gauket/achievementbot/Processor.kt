@@ -1,4 +1,4 @@
-package nl.gauket.performer
+package nl.gauket.achievementbot
 
 import java.lang.IllegalArgumentException
 import java.time.LocalDateTime

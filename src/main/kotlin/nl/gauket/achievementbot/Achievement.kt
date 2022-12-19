@@ -1,4 +1,4 @@
-package nl.gauket.performer
+package nl.gauket.achievementbot
 
 import java.time.Duration
 import java.time.LocalDateTime

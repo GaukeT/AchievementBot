@@ -1,4 +1,4 @@
-package nl.gauket.performer
+package nl.gauket.achievementbot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
