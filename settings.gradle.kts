@@ -1,1 +1,1 @@
-rootProject.name = "performer"
+rootProject.name = "AchievementBot"

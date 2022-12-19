@@ -23,7 +23,7 @@ request:
 ]
 
 response: 
-  tbd                 // returns badges
+  "<svg>...</svg>"    // returns badges as SVG
 ```
 
 ```

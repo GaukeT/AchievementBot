@@ -23,7 +23,7 @@ class Processor() {
             return Achievement(name, type, count, since, last)
         }
 
-        fun encrypt(achievement: Achievement) : State {
+        fun encrypt(achievement: Achievement) : Key {
             // TODO do some more magic //
             println(achievement.event + " " + achievement.count)
             val dataString = achievement.event.plus(delimiter)
@@ -31,7 +31,7 @@ class Processor() {
                 .plus(achievement.count).plus(delimiter)
                 .plus(achievement.since).plus(delimiter)
                 .plus(achievement.last)
-            return State(Base64.getEncoder().encodeToString(dataString.toByteArray()))
+            return Key(Base64.getEncoder().encodeToString(dataString.toByteArray()))
         }
 
         fun validate(event: String, type: AchievementType, achievement: Achievement) {
