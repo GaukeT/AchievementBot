@@ -36,6 +36,6 @@ response
 [
     "BASIC",          // always updates count when called
     "DAILY",          // only updates count once per day but resets to 1 if not daily updated
-    "ANNIVERSARY"     // calculates if there is an anniversary (ONLY useable in /achievements)
+    "ANNIVERSARY"     // calculates if there is an anniversary (1 Day, 1 Month, 1 Year, ...)
 ]
 ```
