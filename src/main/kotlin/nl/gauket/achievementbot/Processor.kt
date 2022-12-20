@@ -17,18 +17,20 @@ class Processor() {
             val name = split[0]
             val type = AchievementType.valueOf(split[1])
             val count = split[2].toInt()
-            val since = LocalDateTime.parse(split[3])
-            val last = LocalDateTime.parse(split[4])
+            val text = split[3]
+            val since = LocalDateTime.parse(split[4])
+            val last = LocalDateTime.parse(split[5])
 
-            return Achievement(name, type, count, since, last)
+            return Achievement(name, type, count, text, since, last)
         }
 
         fun encrypt(achievement: Achievement) : Key {
             // TODO do some more magic //
-            println(achievement.event + " " + achievement.count)
+            println(achievement.event + " - " + achievement.count + " - " + achievement.text)
             val dataString = achievement.event.plus(delimiter)
                 .plus(achievement.type).plus(delimiter)
                 .plus(achievement.count).plus(delimiter)
+                .plus(achievement.text).plus(delimiter)
                 .plus(achievement.since).plus(delimiter)
                 .plus(achievement.last)
             return Key(Base64.getEncoder().encodeToString(dataString.toByteArray()))

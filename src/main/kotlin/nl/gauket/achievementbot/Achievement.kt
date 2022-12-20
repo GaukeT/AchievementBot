@@ -8,10 +8,11 @@ class Achievement {
         this.event = event
         this.type = type
     }
-    constructor(event: String, type: AchievementType, count: Int, since: LocalDateTime, last: LocalDateTime) {
+    constructor(event: String, type: AchievementType, count: Int, text: String, since: LocalDateTime, last: LocalDateTime) {
         this.event = event
         this.type = type
         this.count = count
+        this.text = text
         this.since = since
         this.last = last
     }
@@ -19,8 +20,9 @@ class Achievement {
     var event: String
     var type: AchievementType
     var count: Int = 0
+    var text: String = ""
     var since: LocalDateTime? = LocalDateTime.now()
-    var last: LocalDateTime? = null;
+    var last: LocalDateTime? = null
 
     fun update() {
         // basic type just counts
@@ -28,13 +30,19 @@ class Achievement {
             this.count++
         }
 
-        // daily type count on streak otherwise it resets
+        // daily type counts on streak otherwise it resets
         if (this.type == AchievementType.DAILY) {
             if (this.last == null || isStreak()) {
                 this.count++;
             } else {
+                this.since = LocalDateTime.now()
                 this.count = 1
             }
+        }
+
+        // anniversary type counts on predefined time spans
+        if (this.type == AchievementType.ANNIVERSARY) {
+            this.text = isAnniversary()
         }
 
         // always update last used
@@ -45,5 +53,23 @@ class Achievement {
         val today = LocalDateTime.now()
         val daysPassed = Duration.between(this.last, today).toDays()
         return daysPassed == 1L
+    }
+
+    private fun isAnniversary(): String {
+        val lookUp = arrayOf("1 Day", "1 Week", "1 Month", "1 Year", "5 Years")
+        val today = LocalDateTime.now()
+        val daysPassed = Duration.between(this.since, today).toDays();
+
+        var index = 0
+        if (daysPassed >= 7)
+            index = 1
+        if (daysPassed >= 30)
+            index = 2
+        if (daysPassed >= 365)
+            index = 3
+        if (daysPassed >= (365 * 5))
+            index = 5
+
+        return lookUp[index]
     }
 }

@@ -18,9 +18,13 @@ response:
 ```
 POST /achievements 
 request:
-[
-  ""                  // list of known keys of the earned achievements
-]
+{
+   "title": "",       // Optional: add personal title to badges
+   "keys": [
+        ""            // list of known keys of the earned achievements
+    ]
+}
+
 
 response: 
   "<svg>...</svg>"    // returns badges as SVG
