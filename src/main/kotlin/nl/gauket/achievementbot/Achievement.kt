@@ -33,7 +33,7 @@ class Achievement {
         // daily type counts on streak otherwise it resets
         if (this.type == AchievementType.DAILY) {
             if (this.last == null || isStreak()) {
-                this.count++;
+                this.count++
             } else {
                 this.since = LocalDateTime.now()
                 this.count = 1
@@ -58,7 +58,7 @@ class Achievement {
     private fun isAnniversary(): String {
         val lookUp = arrayOf("1 Day", "1 Week", "1 Month", "1 Year", "5 Years")
         val today = LocalDateTime.now()
-        val daysPassed = Duration.between(this.since, today).toDays();
+        val daysPassed = Duration.between(this.since, today).toDays()
 
         var index = 0
         if (daysPassed >= 7)

@@ -4,12 +4,12 @@ import java.lang.IllegalArgumentException
 import java.time.LocalDateTime
 import java.util.*
 
-class Processor() {
+class Processor {
     companion object {
         private const val delimiter = "&&"
 
         fun decrypt(state: String): Achievement {
-            // TODO do some more magic //
+            // do some more magic //
             val dataString = String(Base64.getDecoder().decode(state))
 
             // return values from dataString
@@ -25,7 +25,7 @@ class Processor() {
         }
 
         fun encrypt(achievement: Achievement) : Key {
-            // TODO do some more magic //
+            // do some more magic //
             println(achievement.event + " - " + achievement.count + " - " + achievement.text)
             val dataString = achievement.event.plus(delimiter)
                 .plus(achievement.type).plus(delimiter)
