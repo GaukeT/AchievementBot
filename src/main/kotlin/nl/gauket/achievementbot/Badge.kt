@@ -25,15 +25,39 @@ class Badge {
                 }
             }
 
+            // GOLD
             var color = "rgba(201, 176, 55, 1)"
             var sub = "rgba(120, 102, 23, 1)"
-            // GOLD, SILVER, BRONZE
-            if (achievement.count <= 3) {
-                color = "rgba(173, 138, 86, 1)"
-                sub = "rgba(121, 98, 63, 1)"
-            } else if (achievement.count <= 7) {
-                color = "rgba(215, 215, 215, 1)"
-                sub = "rgba(146, 146, 146, 1)"
+            when {
+                achievement.count <= 3 -> {
+                    // BRONZE
+                    color = "rgba(173, 138, 86, 1)"
+                    sub = "rgba(121, 98, 63, 1)"
+                }
+                achievement.count <= 7 -> {
+                    // SILVER
+                    color = "rgba(215, 215, 215, 1)"
+                    sub = "rgba(146, 146, 146, 1)"
+                }
+            }
+
+            if (achievement.type == AchievementType.ANNIVERSARY) {
+                when (achievement.text) {
+                    "Year", "Years" -> {
+                        // GOLD
+                        color = "rgba(201, 176, 55, 1)"
+                        sub = "rgba(120, 102, 23, 1)"
+                    }
+                    "Month", "Months" -> {
+                        // SILVER
+                        color = "rgba(215, 215, 215, 1)"
+                        sub = "rgba(146, 146, 146, 1)"
+                    }
+                    else -> {
+                        color = "rgba(173, 138, 86, 1)"
+                        sub = "rgba(121, 98, 63, 1)"
+                    }
+                }
             }
 
             val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -55,7 +79,7 @@ class Badge {
                     "<text style=\"fill: rgb(51, 51, 51); fill-opacity: 0.7; font-family: &quot;Black Han Sans&quot;; font-size: 7.4px; text-transform: capitalize; white-space: pre-wrap; \" x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\">" +
                         span +
                     "</text>" +
-                    "<text style=\"fill: rgb(51, 51, 51); font-family: Abel; font-size: 5px; text-transform: capitalize; white-space: pre;\" x=\"50%\" y=\"75%\" dominant-baseline=\"middle\" text-anchor=\"middle\">" + achievement.type + "</text>" +
+                    "<text style=\"fill: rgb(51, 51, 51); font-family: Abel; font-size: 5px; text-transform: capitalize; white-space: pre;\" x=\"50%\" y=\"75%\" dominant-baseline=\"middle\" text-anchor=\"middle\">" + achievement.text + "</text>" +
                     "<text style=\"fill: rgb(51, 51, 51); font-family: Abel; font-size: 5px; text-transform: capitalize; white-space: pre;\" x=\"50%\" y=\"83%\" dominant-baseline=\"middle\" text-anchor=\"middle\">" + formattedSince + "</text>" +
                    "</svg>"
         }

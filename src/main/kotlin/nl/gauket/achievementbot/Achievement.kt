@@ -7,6 +7,7 @@ class Achievement {
     constructor(event: String, type: AchievementType) {
         this.event = event
         this.type = type
+        this.text = type.label
     }
     constructor(event: String, type: AchievementType, count: Int, text: String, since: LocalDateTime, last: LocalDateTime) {
         this.event = event
@@ -42,7 +43,18 @@ class Achievement {
 
         // anniversary type counts on predefined time spans
         if (this.type == AchievementType.ANNIVERSARY) {
-            this.text = isAnniversary()
+            val today = LocalDateTime.now()
+            val daysPassed =  Duration.between(this.since, today).toDays()
+
+            this.text = isAnniversary(daysPassed)
+            this.count = 1
+
+            if (daysPassed >= 60) {
+                this.count = Integer.parseInt((daysPassed / 30).toString())
+            }
+            if (daysPassed >= 365) {
+                this.count = Integer.parseInt((daysPassed / 365).toString())
+            }
         }
 
         // always update last used
@@ -55,19 +67,19 @@ class Achievement {
         return daysPassed == 1L
     }
 
-    private fun isAnniversary(): String {
-        val lookUp = arrayOf("1 Day", "1 Week", "1 Month", "1 Year", "5 Years")
-        val today = LocalDateTime.now()
-        val daysPassed = Duration.between(this.since, today).toDays()
+    private fun isAnniversary(daysPassed: Long): String {
+        val lookUp = arrayOf("Day", "Week", "Month", "Months", "Year", "Years")
 
         var index = 0
         if (daysPassed >= 7)
             index = 1
         if (daysPassed >= 30)
             index = 2
-        if (daysPassed >= 365)
+        if (daysPassed >= 60)
             index = 3
-        if (daysPassed >= (365 * 5))
+        if (daysPassed >= 365)
+            index = 4
+        if (daysPassed >= (365 * 2))
             index = 5
 
         return lookUp[index]
