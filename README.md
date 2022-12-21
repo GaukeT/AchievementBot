@@ -25,7 +25,6 @@ request:
     ]
 }
 
-
 response: 
   "<svg>...</svg>"    // returns badges as SVG
 ```
